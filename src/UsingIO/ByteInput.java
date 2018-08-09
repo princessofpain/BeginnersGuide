@@ -16,7 +16,7 @@ public class ByteInput {
 		int length = 0;
 		
 		try {
-			testStream = new FileInputStream("E:/Workspace/workspace_oxygen/BeginnersGuide/src/UsingIO/file.txt");
+			testStream = new FileInputStream("src/UsingIO/file.txt");
 			length = testStream.available();
 		} catch (Exception e){
 			e.printStackTrace();
@@ -28,7 +28,7 @@ public class ByteInput {
 	private int readOneByteOfInputStream() {
 		int nextAvailableByte = 0;
 		try {
-			testStream = new FileInputStream("E:/Workspace/workspace_oxygen/BeginnersGuide/src/UsingIO/file.txt");
+			testStream = new FileInputStream("src/UsingIO/file.txt");
 			nextAvailableByte = testStream.read();
 		} catch (Exception e){
 			e.printStackTrace();
@@ -40,7 +40,7 @@ public class ByteInput {
 	private byte[] readAllBytesOfInputStream() {
 		
 		try {
-			testStream = new FileInputStream("E:/Workspace/workspace_oxygen/BeginnersGuide/src/UsingIO/file.txt");
+			testStream = new FileInputStream("src/UsingIO/file.txt");
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

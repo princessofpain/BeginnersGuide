@@ -10,7 +10,7 @@ public class ByteOutput {
 	
 	private void replaceWithOneByte(int newByte) {
 		try {
-			testStream = new FileOutputStream("E:/Workspace/workspace_oxygen/BeginnersGuide/src/UsingIO/file.txt");
+			testStream = new FileOutputStream("src/UsingIO/file.txt");
 			testStream.write(newByte);
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -19,7 +19,7 @@ public class ByteOutput {
 
 	private void replaceWith(byte[] newBytes) {
 		try {
-			testStream = new FileOutputStream("E:/Workspace/workspace_oxygen/BeginnersGuide/src/UsingIO/file.txt");
+			testStream = new FileOutputStream("src/UsingIO/file.txt");
 			testStream.write(newBytes);
 		} catch(Exception e) {
 			e.printStackTrace();
