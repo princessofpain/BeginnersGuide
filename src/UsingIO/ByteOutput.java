@@ -14,6 +14,12 @@ public class ByteOutput {
 			testStream.write(newByte);
 		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				testStream.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -23,6 +29,12 @@ public class ByteOutput {
 			testStream.write(newBytes);
 		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				testStream.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 		

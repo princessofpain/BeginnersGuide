@@ -20,6 +20,12 @@ public class ByteInput {
 			length = testStream.available();
 		} catch (Exception e){
 			e.printStackTrace();
+		} finally {
+			try {
+				testStream.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return length;
@@ -32,6 +38,12 @@ public class ByteInput {
 			nextAvailableByte = testStream.read();
 		} catch (Exception e){
 			e.printStackTrace();
+		} finally {
+			try {
+				testStream.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return nextAvailableByte;
@@ -43,6 +55,12 @@ public class ByteInput {
 			testStream = new FileInputStream("src/UsingIO/file.txt");
 		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				testStream.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		byte allBytes[] = test2.readBytes(testStream);
@@ -55,9 +73,16 @@ public class ByteInput {
 		
 		for(int i = 0; i < inputLength; i++) {
 			try {
+				testStream = new FileInputStream("src/UsingIO/file.txt");
 				testStream.read(allBytes);
 			} catch(Exception e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					testStream.close();
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		
