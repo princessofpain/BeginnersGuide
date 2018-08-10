@@ -50,13 +50,12 @@ public class ByteInput {
 	}
 	
 	private byte[] readBytes(InputStream testStream) {
-		int nextAvailableByte = 0;
 		int inputLength = test2.getLengthOfInputStream();
 		byte[] allBytes = new byte[inputLength];
 		
 		for(int i = 0; i < inputLength; i++) {
 			try {
-				nextAvailableByte = testStream.read(allBytes);
+				testStream.read(allBytes);
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
