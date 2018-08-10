@@ -9,8 +9,7 @@ public class ByteOutput {
 	OutputStream testStream = null;
 	
 	private void replaceWithOneByte(int newByte) {
-		try {
-			testStream = new FileOutputStream("src/UsingIO/file.txt");
+		try(FileOutputStream testStream = new FileOutputStream("src/UsingIO/file.txt")) {
 			testStream.write(newByte);
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -24,18 +23,11 @@ public class ByteOutput {
 	}
 
 	private void replaceWith(byte[] newBytes) {
-		try {
-			testStream = new FileOutputStream("src/UsingIO/file.txt");
+		try(FileOutputStream testStream = new FileOutputStream("src/UsingIO/file.txt")) {
 			testStream.write(newBytes);
 		} catch(Exception e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				testStream.close();
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-		}
+		} 
 	}
 		
 	public static void main(String[] args) {

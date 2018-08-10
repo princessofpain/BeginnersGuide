@@ -2,7 +2,9 @@ package UsingIO;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /* Simple test application for the first steps with I/O
  * Test some methods of the classes InputStream and OutputStream
@@ -15,17 +17,10 @@ public class ByteInput {
 	private int getLengthOfInputStream() {
 		int length = 0;
 		
-		try {
-			testStream = new FileInputStream("src/UsingIO/file.txt");
+		try(FileInputStream testStream = new FileInputStream("src/UsingIO/file.txt")) {
 			length = testStream.available();
 		} catch (Exception e){
 			e.printStackTrace();
-		} finally {
-			try {
-				testStream.close();
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
 		}
 		
 		return length;
@@ -33,37 +28,29 @@ public class ByteInput {
 	
 	private int readOneByteOfInputStream() {
 		int nextAvailableByte = 0;
-		try {
-			testStream = new FileInputStream("src/UsingIO/file.txt");
+		try(FileInputStream testStream = new FileInputStream("src/UsingIO/file.txt")) {
 			nextAvailableByte = testStream.read();
 		} catch (Exception e){
 			e.printStackTrace();
-		} finally {
-			try {
-				testStream.close();
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
 		}
 		
 		return nextAvailableByte;
 	}
 	
-	private byte[] readAllBytesOfInputStream() {
+	private Byte[] readAllBytesOfInputStream() {
+		List<Byte> bytes = new ArrayList<Byte>();
 		
-		try {
-			testStream = new FileInputStream("src/UsingIO/file.txt");
+		try(FileInputStream testStream = new FileInputStream("src/UsingIO/file.txt")) {
+			byte[] allBytes = test2.readBytes(testStream);
+			
+			for(byte b: allBytes) {
+				bytes.add(b);
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				testStream.close();
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-		}
+		}	
 		
-		byte allBytes[] = test2.readBytes(testStream);
+		Byte[] allBytes = bytes.toArray(new Byte[bytes.size()]);
 		return allBytes;
 	}
 	
@@ -73,36 +60,30 @@ public class ByteInput {
 		
 		for(int i = 0; i < inputLength; i++) {
 			try {
-				testStream = new FileInputStream("src/UsingIO/file.txt");
 				testStream.read(allBytes);
 			} catch(Exception e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					testStream.close();
-				} catch(Exception e) {
-					e.printStackTrace();
-				}
-			}
+			} 
 		}
 		
 		return allBytes;
 	}
 	
-	private char[] convertBytesToChars(byte allBytes[]) {
+	private char[] convertBytesToChars(Byte allBytes[]) {
 		int inputLength = test2.getLengthOfInputStream();
 		char singleChar = ' ';
 		char[] allChars = new char[inputLength];
 		
 		for(int i = 0; i < inputLength; i++) {
-			singleChar = (char) allBytes[i];
+			byte b = allBytes[i];
+			singleChar = (char) b;
 			allChars[i] = singleChar;
 		}
 		
 		return allChars;
 	}
 	
-	private String display(byte[] allBytes, char[] allLetters) {
+	private String display(Byte[] allBytes, char[] allLetters) {
 		StringBuilder chars = new StringBuilder();
 		for(char letter: allLetters) {
 			chars.append(letter);
@@ -123,7 +104,7 @@ public class ByteInput {
 		char byteToLetter = (char) nextAvailableByte;
 		System.out.println("The next available byte is " + nextAvailableByte + ". This is the letter " + byteToLetter + ".");
 		
-		byte[] allBytes = test.readAllBytesOfInputStream();	
+		Byte[] allBytes = test.readAllBytesOfInputStream();	
 		char[] allBytesToLetters = test.convertBytesToChars(allBytes);
 		String message = test.display(allBytes, allBytesToLetters);
 		System.out.println(message);
