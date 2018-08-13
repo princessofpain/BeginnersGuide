@@ -1,5 +1,5 @@
 # BeginnersGuide
-Currently I read the book [Java: A Beginner's Guide, Seventh Edition 7th Edition](https://www.amazon.com/Java-Beginners-Seventh-Herbert-Schildt/dp/1259589315) to enhance my Java skills. I use this repo to collect small applications and to play around.
+Currently I read the book [Java: A Beginner's Guide](https://www.amazon.com/Java-Beginners-Seventh-Herbert-Schildt/dp/1259589315) to enhance my Java skills. I use this repo to collect small applications and to play around.
 
 ## Packages
 ### UsingIO
@@ -31,6 +31,9 @@ Try out the class OutputStream and the method `void write(int byteval)`.
 ##### Methods 
 - replaceWithOneByte()
 - replaceWith()
+
+#### file.txt
+Dummy file that contains a short text.
 
 ## How to set it up
 Download or clone the repo. I use Eclipse, but other IDEs may work similar. Simply create a new project and import the repo in this project. Run the application with the functionality provided by the IDE.
