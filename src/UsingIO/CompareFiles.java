@@ -1,80 +1,73 @@
 package UsingIO;
 
 import java.io.FileInputStream;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.io.IOException;
 
 public class CompareFiles {
 	
 	private static CompareFiles comparison = new CompareFiles();
+	private int i = 0; 
+	private int j = 0;
 	
-	private Byte[] readAllBytesOfInputStream(String path) {
-		List<Byte> bytes = new ArrayList<Byte>();
-		int inputLength = comparison.getLengthOfInputStream(path);
+	public static void main(String[] args) {			
+		String[] files = comparison.addFiles();
 		
-		try(FileInputStream testStream = new FileInputStream(path)) {
-			byte[] allBytes = comparison.readBytes(testStream, inputLength);
-			
-			for(byte b: allBytes) {
-				bytes.add(b);
-			}
+		try (FileInputStream contentFile1 = new FileInputStream(files[0]);
+				FileInputStream contentFile2 = new FileInputStream(files[1])) {
+			comparison.readFiles(contentFile1, contentFile2);			
+			comparison.showResult();
 		} catch(Exception e) {
 			e.printStackTrace();
-		}	
-		
-		Byte[] allBytes = bytes.toArray(new Byte[bytes.size()]);
-		return allBytes;
-	}
-	
-	private byte[] readBytes(InputStream testStream, int inputLength) {
-		byte[] allBytes = new byte[inputLength];
-		
-		for(int i = 0; i < inputLength; i++) {
-			try {
-				testStream.read(allBytes);
-			} catch(Exception e) {
-				e.printStackTrace();
-			} 
 		}
-		
-		return allBytes;
 	}
 	
-	private int getLengthOfInputStream(String path) {
-		int length = 0;
+	private String[] addFiles() {
+		String[] files = new String[2];
 		
-		try(FileInputStream testStream = new FileInputStream(path)) {
-			length = testStream.available();
-		} catch (Exception e){
+		try {
+			byte[] data = new byte[100];
+			System.out.println("Enter the filepath of the first file.");
+			System.in.read(data);
+			String file1 = comparison.cleanArray(data);
+			files[0] = file1;
+			
+			System.out.println("Enter the filepath of the second file.");
+			System.in.read(data);
+			String file2 = comparison.cleanArray(data);
+			files[1] = file2;
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		
-		return length;
+		return files;
 	}
 	
-	private String compareTwoFiles(Byte[] fileA, Byte[] fileB) {
-		if(Arrays.deepEquals(fileA, fileB)) {
-			return "Files are the same";
+	private String cleanArray(byte[] input) {
+		StringBuilder filepath = new StringBuilder();
+		for(byte b: input) {
+			char c = (char) b;
+			if(c > 31) {
+				filepath.append(c);
+			}
+		}
+		
+		return filepath.toString();
+	}
+	
+	private void readFiles(FileInputStream contentFile1, FileInputStream contentFile2) throws IOException {
+		System.out.println();
+		do {
+			i = contentFile1.read();
+			j = contentFile2.read();
+		} while(i != -1 && j != -1 && i == j);
+	}
+	
+	private void showResult() {
+		if(i != j) {
+			System.out.println("Files are not the same");
 		} else {
-			return "Files are not the same";
+			System.out.println("Files are the same");
 		}
 	}
-	
-	public static void main(String[] args) {		
-		String file1 = "src/UsingIO/comparison1.txt";
-		String file2 = "src/UsingIO/comparison2.txt";
-		String file3 = "src/UsingIO/comparison3.txt";
-		
-		Byte[] contentFile1 = comparison.readAllBytesOfInputStream(file1);
-		Byte[] contentFile2 = comparison.readAllBytesOfInputStream(file2);
-		Byte[] contentFile3 = comparison.readAllBytesOfInputStream(file3);
-		
-		String comparison1 = comparison.compareTwoFiles(contentFile1, contentFile2);
-		String comparison2 = comparison.compareTwoFiles(contentFile1, contentFile3);
-		String comparison3 = comparison.compareTwoFiles(contentFile2, contentFile3);
-		
-		System.out.println(comparison1 + "\n" + comparison2 + "\n" + comparison3);
-	}
 }
+
