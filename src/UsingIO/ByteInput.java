@@ -1,4 +1,4 @@
-package UsingIO;
+package usingIO;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -14,7 +14,23 @@ public class ByteInput {
 	InputStream testStream = null;
 	private static ByteInput test2 = new ByteInput();
 	
-	private int getLengthOfInputStream() {
+	public static void main(String[] args) {
+		ByteInput test = new ByteInput();
+		
+		int fileLength = test.getLengthOfInputStream();		
+		System.out.println("The file has " + fileLength + " Bytes.");
+		
+		int nextAvailableByte = test.readOneByteOfInputStream();
+		char byteToLetter = (char) nextAvailableByte;
+		System.out.println("The next available byte is " + nextAvailableByte + ". This is the letter " + byteToLetter + ".");
+		
+		Byte[] allBytes = test.readAllBytesOfInputStream();	
+		char[] allBytesToLetters = test.convertBytesToChars(allBytes);
+		String message = test.display(allBytes, allBytesToLetters);
+		System.out.println(message);
+	}
+	
+	public int getLengthOfInputStream() {
 		int length = 0;
 		
 		try(FileInputStream testStream = new FileInputStream("src/UsingIO/file.txt")) {
@@ -26,7 +42,7 @@ public class ByteInput {
 		return length;
 	}
 	
-	private int readOneByteOfInputStream() {
+	public int readOneByteOfInputStream() {
 		int nextAvailableByte = 0;
 		try(FileInputStream testStream = new FileInputStream("src/UsingIO/file.txt")) {
 			nextAvailableByte = testStream.read();
@@ -37,7 +53,7 @@ public class ByteInput {
 		return nextAvailableByte;
 	}
 	
-	private Byte[] readAllBytesOfInputStream() {
+	public Byte[] readAllBytesOfInputStream() {
 		List<Byte> bytes = new ArrayList<Byte>();
 		
 		try(FileInputStream testStream = new FileInputStream("src/UsingIO/file.txt")) {
@@ -69,7 +85,7 @@ public class ByteInput {
 		return allBytes;
 	}
 	
-	private char[] convertBytesToChars(Byte allBytes[]) {
+	public char[] convertBytesToChars(Byte allBytes[]) {
 		int inputLength = test2.getLengthOfInputStream();
 		char singleChar = ' ';
 		char[] allChars = new char[inputLength];
@@ -83,7 +99,7 @@ public class ByteInput {
 		return allChars;
 	}
 	
-	private String display(Byte[] allBytes, char[] allLetters) {
+	public String display(Byte[] allBytes, char[] allLetters) {
 		StringBuilder chars = new StringBuilder();
 		for(char letter: allLetters) {
 			chars.append(letter);
@@ -92,21 +108,5 @@ public class ByteInput {
 		String message = "\nThis are all Bytes of the input: " + Arrays.toString(allBytes) + ".\n\nAnd this is the whole content of the file build with the single chars:\n" + chars.toString();
 		
 		return message;
-	}
-	
-	public static void main(String[] args) {
-		ByteInput test = new ByteInput();
-		
-		int fileLength = test.getLengthOfInputStream();		
-		System.out.println("The file has " + fileLength + " Bytes.");
-		
-		int nextAvailableByte = test.readOneByteOfInputStream();
-		char byteToLetter = (char) nextAvailableByte;
-		System.out.println("The next available byte is " + nextAvailableByte + ". This is the letter " + byteToLetter + ".");
-		
-		Byte[] allBytes = test.readAllBytesOfInputStream();	
-		char[] allBytesToLetters = test.convertBytesToChars(allBytes);
-		String message = test.display(allBytes, allBytesToLetters);
-		System.out.println(message);
 	}
 }
