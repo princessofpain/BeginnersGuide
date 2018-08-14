@@ -8,9 +8,9 @@ public class ByteConsoleInputAndOutput {
 	
 	public static void main(String[] args) throws IOException {	
 		// Use one method at a time. Undo the comments to change the active method.
-		System.out.println(input.readOneChar());
+		//System.out.println(input.readOneChar());
 		//System.out.println(input.readASequence());
-		//System.out.println(input.readASnippetOfTheSequence());
+		System.out.println(input.readASnippetOfTheSequence());
 	}
 	
 	public String readOneChar() throws IOException {
@@ -29,9 +29,9 @@ public class ByteConsoleInputAndOutput {
 	}
 	
 	public String readASnippetOfTheSequence() throws IOException {
-		System.out.println("Type a squence of 20 characters. Just character 5 - 15 will be safed.");
+		System.out.println("Type a squence of 20 characters. Just character 0 - 5 will be safed.");
 		byte[] dataSnippet = new byte[20];
-		System.in.read(dataSnippet, 4, 10);
+		System.in.read(dataSnippet, 0, 5);
 		String result = input.buildStringOf(dataSnippet);
 		return result;
 	}
@@ -40,8 +40,10 @@ public class ByteConsoleInputAndOutput {
 		StringBuilder build = new StringBuilder();
 		
 		for(int i = 0; i < data.length; i++) {
-			char letter = (char) data[i];
-			build.append(letter);
+			if(data[i] > 31) {
+				char letter = (char) data[i];
+				build.append(letter);	
+			}
 		}
 		
 		String convertedString = build.toString();
