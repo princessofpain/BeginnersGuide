@@ -18,7 +18,7 @@ public class CompareFiles {
 		}
 	}
 	
-	private String[] addFiles() {
+	public String[] addFiles() {
 		String[] files = new String[2];
 		
 		try {
