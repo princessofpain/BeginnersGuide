@@ -1,4 +1,4 @@
-package UsingIO;
+package usingIO;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -6,16 +6,13 @@ import java.io.IOException;
 public class CompareFiles {
 	
 	private static CompareFiles comparison = new CompareFiles();
-	private int i = 0; 
-	private int j = 0;
 	
 	public static void main(String[] args) {			
 		String[] files = comparison.addFiles();
 		
 		try (FileInputStream contentFile1 = new FileInputStream(files[0]);
 				FileInputStream contentFile2 = new FileInputStream(files[1])) {
-			comparison.readFiles(contentFile1, contentFile2);			
-			comparison.showResult();
+			comparison.readFilesAndShowResult(contentFile1, contentFile2);			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -54,19 +51,20 @@ public class CompareFiles {
 		return filepath.toString();
 	}
 	
-	private void readFiles(FileInputStream contentFile1, FileInputStream contentFile2) throws IOException {
+	public String readFilesAndShowResult(FileInputStream contentFile1, FileInputStream contentFile2) throws IOException {
 		System.out.println();
+		int i = 0; 
+		int j = 0;
+		
 		do {
 			i = contentFile1.read();
 			j = contentFile2.read();
 		} while(i != -1 && j != -1 && i == j);
-	}
-	
-	private void showResult() {
+		
 		if(i != j) {
-			System.out.println("Files are not the same");
+			return "Files are not the same";
 		} else {
-			System.out.println("Files are the same");
+			return "Files are the same";
 		}
 	}
 }
