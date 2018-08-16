@@ -1,9 +1,9 @@
-package UsingIO;
-
-import UsingIO.ByteInput;
+package usingIO;
 
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+
+import usingIO.ByteInput;
 
 public class ByteOutput {
 	OutputStream testStream = null;

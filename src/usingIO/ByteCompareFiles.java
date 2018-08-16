@@ -3,9 +3,9 @@ package usingIO;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class CompareFiles {
+public class ByteCompareFiles {
 	
-	private static CompareFiles comparison = new CompareFiles();
+	private static ByteCompareFiles comparison = new ByteCompareFiles();
 	
 	public static void main(String[] args) {			
 		String[] files = comparison.addFiles();
