@@ -3,14 +3,11 @@ package test;
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.*;
 
-import java.util.Arrays;
-
 import usingIO.ByteInput;
 
 class ByteInputTest {
 	
 	private static ByteInput input = new ByteInput();
-	private static ByteInputTest inputTest = new ByteInputTest();
 
 	@Test
 	void lengthIsReturned() {

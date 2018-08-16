@@ -8,11 +8,11 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.junit.jupiter.api.Test;
-import usingIO.CompareFiles;
+import usingIO.ByteCompareFiles;
 
-class CompareFilesTest {
+class ByteCompareFilesTest {
 	
-	private CompareFiles comparison = new CompareFiles();
+	private ByteCompareFiles comparison = new ByteCompareFiles();
 
 	@Test
 	void fileIsAdded() {
