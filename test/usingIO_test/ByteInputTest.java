@@ -1,4 +1,4 @@
-package test;
+package usingIO_test;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.*;
